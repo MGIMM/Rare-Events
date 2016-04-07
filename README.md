@@ -15,8 +15,9 @@
 ### 07-04-2016
 
 * remark corrected
-* permutation trick added
-* fluctuation analysis for idealized situation started(bugs)
+* permutation trick added (adapted version finished)
+* fluctuation analysis for idealized situation started
+* bugs in fixed-level version
 
 
 
