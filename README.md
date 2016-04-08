@@ -1,4 +1,7 @@
 # Rare-Events
+
+## Scheduel:
+
 ### 05-04-2016
 	
 * Toy example finished (fixed levels & adaptive levels) 
@@ -17,8 +20,16 @@
 * remark corrected
 * permutation trick added (adapted version finished)
 * fluctuation analysis for idealized situation started
-* bugs in fixed-level version
+* bugs in fixed-level version, relative variance added for adapted version
 
+### 08-04-2016
+* bug fixed in fixed-levels version
+* fluctuation analysis for fixed levels finished
 
+*In fact, it the choice of the sigma_1 in shaker that cause the problem! The sigma_1 could not be large or small!*
+
+* fluctuation analysis for adapted levels being calculated on sagemath
+ 
+ 
 
 
