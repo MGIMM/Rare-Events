@@ -26,9 +26,10 @@
 * bug fixed in fixed-levels version
 * fluctuation analysis for fixed levels finished
 
-*In fact, it the choice of the sigma_1 in shaker that cause the problem! The sigma_1 could not be large or small!*
+*In fact, it's the choice of the sigma_1 in shaker that cause the problem! The sigma_1 could not be large or small!*
 
-* fluctuation analysis for adapted levels being calculated on sagemath
+* fluctuation analysis for adapted levels finished(for q = 2.5 to avoid the influence of bias)
+
  
  
 
