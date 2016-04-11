@@ -30,6 +30,11 @@
 
 * fluctuation analysis for adapted levels finished(for q = 2.5 to avoid the influence of bias)
 
+### 010-04-2016
+
+* new test results added
+* add shaker in the adapted version
+
  
  
 
