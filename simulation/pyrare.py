@@ -193,7 +193,7 @@ class RareEvents_test:
 
         ###### shaker
         ###### we will use an adaptive method to set the parameter of the shaker by
-        ###### control the rejection rate.
+        ###### controlling the rejection rate.
 
             for index_shaker in range(shake_times):
                 rate = 1.
