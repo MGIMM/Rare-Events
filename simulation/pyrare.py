@@ -10,7 +10,7 @@ class RareEvents:
         :param p_0: the successful rate
         :param mu_0: the distribution of X_0
         :param score_function: the black box score_function
-        :param shaker: metro-polis kernel
+        :param shaker: metro-polis/Gibbs kernel
         """
         self.mu_0 = mu_0
         self.score_function = score_function
@@ -95,7 +95,7 @@ class RareEvents:
         if status_tracking ==True:
             print ("final k = " + str(k))
             print ("estimation of p: " + str(p_hat))
-            print ('\n______________________________________________________\n')
+            print ('______________________________\n')
             print ("Time spent: %s s" %(time() - t_0) )
             print ("score_function called: %s times" % S_called_times)
-        return p_hat
+        return p_hat, np.int(k-1), N_L/float(N)
