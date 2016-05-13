@@ -56,12 +56,31 @@ def shaker_metropolis(X,sigma_1):
 
 
 print ('\n============================================================')
-p_0_test = 0.1 
-N_test = 500
+####### parameters ######
+#p_0_test = 0.1 
+#N_test = 500
 #shaker = shaker_metropolis
-shaker = shaker_gaussian
-shake_times = 10
+##shaker = shaker_gaussian
+#shake_times = 5 
+def input_parameters():
+    print ('Please input the parameters:\n')
+    p_0_test = input('P_0_test: ')
+    N_test = input('number of particles: ')
+    shake_times = input('shake_times: ')
+    shaker_choice = 'empty'
+    while shaker_choice not in ['metropolis', 'gaussian']:
+        shaker_choice = raw_input("shaker('metropolis' or 'gaussian'): ")
+    
+    if shaker_choice == 'metropolis':
+        shaker = shaker_metropolis
+    elif shaker_choice == 'gaussian':
+        shaker = shaker_gaussian
+    print ('____________________________________________________________')
+    return p_0_test, N_test, shaker, shake_times
 
+p_0_test, N_test, shaker, shake_times = input_parameters()
+#########################
+print ('Status:\n')
 print ('shaker: ' + str(shaker))
 print ('shake_times: ' + str(shake_times))
 print ('number of particles: '+ str(N_test))
@@ -73,7 +92,7 @@ rare_test = RareEvents(mu_0 = mu_0_test, score_function = S_test,
 #	reject_rate = 0.5, sigma_default = 0.5, descent_step = 0.2,status_tracking=True)
 #
 ##############################
-# Simualtion & Plotting #
+### Simualtion & Plotting ####
 ##############################
 print ("Calculating...")
 list_p = []
@@ -96,7 +115,8 @@ sigma_hat = np.sqrt(n_0_hat*((1-p_0_test)/p_0_test) + (1-r_hat)/r_hat)
 alpha = norm.ppf(0.975)
 p_hat = np.mean(list_p)
 IC = [p_hat/(1+alpha*sigma_hat/np.sqrt(N_test)), p_hat/(1-alpha*sigma_hat/np.sqrt(N_test))]
-print ('____________________________________________________________\n')
+print ('____________________________________________________________')
+print ('Results:\n') 
 print ('estimation of p: %s' % p_hat)
 print ('sigma_hat: %s' % sigma_hat)
 print ('n_0_hat: %s' % n_0_hat)
@@ -107,13 +127,15 @@ print ('============================================================\n')
 ############### PLOT ###############    
 plt.figure(figsize = [15,10])
 plt.subplot(211)
-sns.distplot(list_p,color = 'grey', label = 'estimation')
-plt.plot(p_real,0,color = 'darkred',marker = 'o',label = 'real_p')
-plt.xlim(p_real-5*p_real,p_real+5*p_real)
+sns.distplot((list_p/p_real - 1) * np.sqrt(N_test),color = 'grey', label = 'estimation')
+plt.plot(np.arange(-100,100,0.1), norm.pdf(np.arange(-100,100,0.1), 0, params[2]),color = 'darkred',label = 'theoretical')
+plt.xlim([-100,100])
+plt.title('Relative Variance $\sqrt{N} (\hat p - p)/p$')
 plt.legend()
 
 plt.subplot(212)
-sns.distplot(list_n_0,color = 'grey', label = 'estimation')
-plt.plot(n_0_real,0,color = 'darkblue',marker = 'o',label = 'real_k')
+sns.distplot(list_n_0,bins = len(list_n_0), color = 'grey', label = 'estimation', kde = False)
+plt.plot(n_0_real,0,color = 'darkblue',marker = 'o',label = 'real $n_0$')
+plt.title('Histogram of $\hat n_0$')
 plt.legend()
 plt.show()

@@ -18,8 +18,8 @@ class RareEvents:
         self.level = level
         self.p_0 = p_0
 
-    def adaptive_levels(self,N, shake_times = 5,
-                                  reject_rate = 0.5, sigma_default = 0.5,
+    def adaptive_levels(self,N, shake_times = 10,\
+                                  reject_rate = 0.5, sigma_default = 0.5,\
                                 descent_step = 0.02, status_tracking = False):
         ###### Initiation
         t_0 = time()
