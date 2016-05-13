@@ -1,0 +1,22 @@
+============================================================
+status:
+
+p_0 = 0.1	 n_0 =14	 r = 0.133226762955
+real value of p: 1.33226762955e-15
+theoretical relative deviation: 11.5111250266
+shaker: <function shaker_gaussian at 0x111312938>
+shake_times: 2
+number of particles: 200
+____________________________________________________________
+results:
+
+number of simulation: 100
+estimation of p: 2.266805e-14
+sigma_hat: 10.0356951849
+n_0_hat: 11
+95% confidence interval(idealized): 
+[9.4811644794885464e-15, -5.7996678136340456e-14]
+empirical relative variance: 2056.79086145
+score function called (average) 6202.0 times
+============================================================
+

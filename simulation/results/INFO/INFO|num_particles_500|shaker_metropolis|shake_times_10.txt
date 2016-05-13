@@ -1,0 +1,22 @@
+============================================================
+status:
+
+p_0 = 0.1	 n_0 =14	 r = 0.133226762955
+real value of p: 1.33226762955e-15
+theoretical relative deviation: 11.5111250266
+shaker: <function shaker_metropolis at 0x10c146500>
+shake_times: 10
+number of particles: 500
+____________________________________________________________
+results:
+
+number of simulation: 100
+estimation of p: 1.66124e-15
+sigma_hat: 11.2858320568
+n_0_hat: 14
+95% confidence interval(idealized): 
+[8.3511768551319225e-16, 1.5422720194785854e-13]
+empirical relative variance: 24.0441002273
+score function called (average) 44392.0 times
+============================================================
+

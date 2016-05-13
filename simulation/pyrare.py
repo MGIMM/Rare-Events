@@ -98,4 +98,5 @@ class RareEvents:
             print ('______________________________\n')
             print ("Time spent: %s s" %(time() - t_0) )
             print ("score_function called: %s times" % S_called_times)
-        return p_hat, np.int(k-1), N_L/float(N)
+        return p_hat, np.int(k-1), N_L/float(N), S_called_times
+    
