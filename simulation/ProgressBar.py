@@ -8,10 +8,9 @@ class ProgressBar:
         self.width = width
     def move(self):
         self.count += 1
-    def log(self, s):
+    def log(self):
         sys.stdout.write(' ' * (self.width + 9) + '\r')
         sys.stdout.flush()
-        print s
         progress = self.width * self.count / self.total
         sys.stdout.write('{0:3}/{1:3}: '.format(self.count, self.total))
         sys.stdout.write('#' * progress + '-' * (self.width - progress) + '\r')
