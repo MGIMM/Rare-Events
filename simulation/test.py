@@ -103,18 +103,18 @@ bar = ProgressBar(total = num_simulation)
 for i in range(num_simulation):
 ###ProgressBar###
     bar.move()
-    bar.log('calculating... \t %s finished'%(i+1))
-    
+    bar.log()
 #################
-    iter_simualtion = rare_test.adaptive_levels\
+    iter_output = rare_test.adaptive_levels\
             (N = N_test,  shake_times = shake_times,reject_rate = 0.5, \
             sigma_default = 0.5, descent_step = 0.2,status_tracking=False)
-    list_p = np.append(list_p,iter_simualtion[0])           
-    list_n_0 += [iter_simualtion[1]]
-    list_r = np.append(list_r,iter_simualtion[2])
-    list_s_called_times = iter_simualtion[3]
+    list_p = np.append(list_p, iter_output['p_hat'])           
+    list_n_0 += [iter_output['n_0_hat']]
+    list_r = np.append(list_r,iter_output['r_hat'])
+    list_s_called_times = np.append(list_s_called_times, iter_output['S_called_times']) 
 
 r_hat = np.mean(list_r)
+
 n_0_real = params[3]
 p_real = params[0]
 n_0_hat = list_n_0[np.argmax(np.bincount(list_n_0))] 
@@ -125,7 +125,7 @@ p_hat = np.mean(list_p)
 ic = [p_hat/(1+alpha*sigma_hat/np.sqrt(N_test)), p_hat/(1-alpha*sigma_hat/np.sqrt(N_test))]
 
 ### save the records ###
-test_tracker = open('results/info/info' + test_info + '.txt', 'w')
+test_tracker = open('logs/INFO/INFO' + test_info + '.txt', 'w')
 sys.stdout = test_tracker
 print ('============================================================')
 print ('status:\n')
@@ -161,6 +161,6 @@ real_n_0, = plt.plot(n_0_real,0,color = 'darkred',marker = 'o',label = 'real $n_
 plt.title('Histogram of $\hat n_0$')
 plt.legend(handler_map={ real_n_0: HandlerLine2D(numpoints=1)})
 plt.grid(b=True, which='both', color='grey',linestyle='-')
-plt.savefig('results/FIGS/FIG' + test_info + '.png')
+plt.savefig('logs/FIGS/FIG' + test_info + '.png')
 plt.show()
 plt.close()

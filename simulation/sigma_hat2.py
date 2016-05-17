@@ -1,4 +1,3 @@
-
 from pyrare import *
 import sys
 import numpy as np
@@ -50,10 +49,10 @@ def shaker_metropolis(x,sigma_1):
 print ('\n============================================================')
 ####### parameters ######
 p_0_test = 0.1 
-N_test = 200
+N_test = 1000
 #shaker = shaker_metropolis
 shaker = shaker_gaussian
-shake_times = 2
+shake_times = 3 
 num_simulation = 100
 #def input_parameters():
 #    print ('please input the parameters:\n')
@@ -78,6 +77,7 @@ test_info = '|num_particles_' + str(N_test) + '|' + \
         str(shaker).split(' ')[1] + '|shake_times_' + str(shake_times) 
         
 
+print ('Info: ' + test_info)
 params = get_paramS_test(q_test = 8, p_0 = p_0_test,status_tracking = True)
 
 rare_test = RareEvents(mu_0 = mu_0_test, score_function = S_test, 
@@ -97,16 +97,13 @@ for i in range(num_simulation):
 ###ProgressBar###
     bar.move()
     bar.log()
-
-    
 #################
-    iter_simualtion = rare_test.adaptive_levels\
+    iter_output = rare_test.adaptive_levels\
             (N = N_test,  shake_times = shake_times,reject_rate = 0.5, \
             sigma_default = 0.5, descent_step = 0.2,status_tracking=False)
-    list_p = np.append(list_p,iter_simualtion[0])           
-    list_n_0 += [iter_simualtion[1]]
-    list_r = np.append(list_r,iter_simualtion[2])
-    list_s_called_times = iter_simualtion[3]
+    list_p = np.append(list_p, iter_output['p_hat'])           
+    list_n_0 += [iter_output['n_0_hat']]
+    list_r = np.append(list_r,iter_output['r_hat'])
 
 r_hat = np.mean(list_r)
 n_0_real = params[2]
@@ -120,3 +117,4 @@ print ('estimation of p: ' + str(np.mean(list_p)))
 print ('sigma (theoretical): ' + str(params[1]))
 print ('sigma (idealized): ' + str(sigma_idealized))
 print ('sigma_tilde (empirical): ' + str(sigma_empirical))
+print ('============================================================\n')

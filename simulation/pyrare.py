@@ -29,9 +29,6 @@ class RareEvents:
         L = np.array([-np.Inf,np.sort(self.score_function(X))[np.int((1-p_0)*N)]])
         k = 1
         S_called_times = 0
-
-
-
         ######
 
         while(L[k]<self.level):
@@ -64,19 +61,14 @@ class RareEvents:
                 sigma_1 = sigma_default
                 while(rate>reject_rate):
 
-                    reject = N - ell          #if we don't change the elements of I_k
+                    reject = N - ell 
                     for j in range(ell,N,1):
-                    #reject = N               #if we change the elements of I_k to have less dependence
-                    #for j in range(N):
-
                         X_iter = self.shaker(X[j],sigma_1 = sigma_1)
                         if self.score_function(X_iter) > L[k]:
                             S_called_times += 1
                             X[j] = X_iter
                             reject -= 1.
                     rate = reject/np.float(N - ell)
-                    #rate = reject/np.float(N) #if we change the elements of I_k to have less dependence
-
                     sigma_1 -= descent_step
                     if sigma_1 <= 0:
                         break
@@ -95,8 +87,9 @@ class RareEvents:
         if status_tracking ==True:
             print ("final k = " + str(k))
             print ("estimation of p: " + str(p_hat))
-            print ('______________________________\n')
+            print ('____________________________________________________________\n')
             print ("Time spent: %s s" %(time() - t_0) )
             print ("score_function called: %s times" % S_called_times)
-        return p_hat, np.int(k-1), N_L/float(N), S_called_times
-    
+        output = {'p_hat':p_hat, 'n_0_hat':np.int(k-1), \
+                'r_hat':N_L/float(N), 'S_called_times': S_called_times}    
+        return output 
