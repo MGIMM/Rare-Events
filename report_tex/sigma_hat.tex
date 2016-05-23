@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{dsfont}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Analysis of Asymptotic Relative Variance\\ for Adaptive Multilevel Splitting Method}
 \author{Qiming DU}
 \date{}
@@ -115,25 +116,25 @@ $$E_k = \frac{1}{p_k}\tilde E_{k+1}$$
 
 By the assumption above, we have also:
 
-$$ \tilde E_{k+1} \leq p_k \cdot C_k^2 \cdot E_{k+1}$$
+$$ \tilde E_{k+1} \leq C_k^2 \cdot E_{k+1}$$
 
 Then, by combining the two equations above, we finally obtain an inequality:
 
-$$E_k \leq C^2_k \cdot E_{k+1}$$
+$$E_k \leq \beta_k  \cdot E_{k+1} \qquad \text{where} \  \beta_k = \frac{C_k^2}{p_k}$$
 
-It's important to remark that we set all the $E_k = 1$ and $C^2_k = 1$ for $k \geq n$.
+It's important to remark that we set all the $E_k = 1$ and $\beta_k = 1$ for $k \geq n$.
 
 \begin{equation*}
         \begin{split}
                 \sigma^2 &= \sum_{k = 0}^{n-1} \big( E_k - 1\big) \\
-                &\leq -n +\sum _{k=0}^{n-1} C^2_k \cdot E_{k+1}\\
+                &\leq -n +\sum _{k=0}^{n-1} \beta_k \cdot E_{k+1}\\
                 &\vdots \\
-                &\leq -n + \sum_{k=0}^{n-1} C^2_k \cdot C^2_{k+1}\cdots C^2_{k+(n-1)}\cdot 1\\
+                &\leq -n + \sum_{k=0}^{n-1} \beta_k \cdot \beta_{k+1}\cdots \beta_{k+(n-1)}\cdot 1\\
         \end{split}
 \end{equation*}
 
 If we could choose a constant $C$, such that $C_k = C$ for every $k = 0,1,\dots,n-1$, we will obtain the upper bound below:
-$$\sigma^2 \leq C^2 \cdot \Bigg( \frac{1 - C^{2n} }{1 - C^2}\Bigg) - n$$
+$$\sigma^2 \leq \frac{C^2}{r} \cdot \Bigg( \frac{1 - \big(\frac{C^2}{\alpha}\big)^{n} }{1 - \big(\frac{C^2}{\alpha}\big)}\Bigg) - n$$
 
 We could see that the quality of the upper bound are guaranteed by the choice of constant $C_k$. And it is clear that there are some bound for $C$, because we have seen that there exists a lower bound of $\sigma^2$.
 
