@@ -1,0 +1,150 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\title{Analysis of Asymptotic Relative Variance\\ for Adaptive Multilevel Splitting Method}
+\author{Qiming DU}
+\date{}
+\setlength\parindent{0pt}
+\begin{document}
+\maketitle
+\vspace{3cm}
+\section{Notations}
+
+In this section, we recall the notations used for the following calculations.
+We noticed that the notations are mainly from \cite{cerou2014fluctuation} 
+and \cite{cerou2012}. In the framework of multilevel spitting method, 
+we note $p$ the probability $\mathds{P}\big(S(X) > L_*\big)$. 
+For adaptive multilevel splitting method, we decompose p such that,
+$ p = \alpha^{n_0}r$, where $n_0 = \big\lfloor \frac{\mathrm{log}(p)}{\mathrm{log}(\alpha)} \big\rfloor$, $\alpha \in (0,1)$ and $r \in (\alpha,1)$.
+Here, to simplify the application of Feynman-Kac model, we will let $n = n_0 + 1$. For all the $k = 0,1,2,\dots,n_0-1$, we note $p_k = \alpha$ and $p_{n_0+1} = r$.
+Therefore, the sequence of levels are noted as follow: 
+
+$$ -\infty = L_{-1} < L_0 < \dots < L_{n-1} < L_n = L_*$$
+
+All the notations in the Feynman-Kac model are introduced from \cite{del2004feynman}.
+Particularly, we recall the definition of unnormed prediction (page 59 Definition 2.3.2)
+\cite{del2004feynman} which is useful for our further calculations.
+$$\gamma_n(1) = \prod_{p = 0 }^{n-1} \eta_p(G_p) \text{ \qquad with \ }
+G_p = \mathds{1}_{\mathcal{A}_{p+1}} 
+\ \text{where}\ \mathcal{A}_p := \big\{ x \in \mathds{R}^d : S(x) > L_p \big\}$$
+
+By convention, we set $\gamma_0 = \eta_0$.
+
+\section{Proof for Lower Bound}
+Adopting the notations pf Proposition 9.4.1 on page 301 of \cite{del2004feynman}, for the same purpose of A.2 of \cite{cerou2012}, we will have:
+\begin{equation*}
+\mathrm{Var}\Big(\sqrt{N}\big(\hat p - p\big)\Big) 
+\underset{N \to \infty}{\overset{\mathrm{d}}{\longrightarrow}}
+ \mathds{E}\big(W_n^{\gamma}\big) \\ 
+= \gamma_{n}^2(1) \sum_{k = 0}^{n-1} \eta_k\Big(\big(\frac{Q_{k,n}(1)}{\eta_k Q_{k,n}(1)} - 1\big)^2\Big)
+\end{equation*}
+
+In our context this can be written as follows:
+
+\begin{equation}\label{eq:sigma2}
+ \sigma^2  
+=  \sum_{k = 0}^{n-1} \eta_k\Big(\big(\frac{Q_{k,n}(1)}{\eta_k Q_{k,n}(1)} - 1\big)^2\Big)
+\end{equation}
+
+We remark that when $k = n$, the term under the sum of \eqref{eq:sigma2} 
+equals 0. By the simple calculation, we could also have an alternative version of $\sigma^2$:
+
+\begin{equation}\label{eq:sigma2_alternative}
+ \sigma^2  
+ =  \sum_{k = 0}^{n-1} \Bigg( \frac{\eta_k \big(Q_{k,n}(1)^2\big)}{\big(\eta_k Q_{k,n}(1)\big)^2} - 1 \Bigg)
+\end{equation}
+
+Now, for every $k = 0,1,\dots,n-1$ we consider the following Boltzmann-Gibbs transformation:
+
+$$\Psi_{G_k}(\eta(\mathrm{d}x))(\mathrm{d}x') = \frac{G_k(x) \eta(\mathrm{d}x) }{\eta (G_k)}$$
+
+One can readily check that,
+
+$$\eta_{k} Q_k,n(1) = \eta_k(G_k) \cdot\Psi_{G_k} (\eta_k) \big(Q_{k,n}(1)\big) = p_k \cdot \eta_{k+1} \big{Q_k,n}(1) $$
+
+$$\eta_{k} \big({Q_k,n}(1)^2\big) = \eta_k(G_k)\cdot\Psi_{G_k} (\eta_k) \big(Q_{k,n}(1)^2\big) = p_k \cdot \eta_{k+1} \big(Q_{k,n}(1)^2\big)$$
+
+and
+
+$$\eta_{k+1} \big( Q_{k,n}(1)\big) = \eta_{k+1} \big( Q_{k+1,n}(1)\big)$$
+
+Therefore, we have 
+$$\frac{\eta_k \big(Q_{k,n}(1)^2\big)}{\big(\eta_k Q_{k,n}(1)\big)^2} = \frac{1}{p_k}\cdot\frac{\eta_{k+1} \big(Q_{k,n}(1)^2\big)}{\big(\eta_{k+1} Q_{k+1,n}(1)\big)^2}$$
+
+We combine these to the equations \eqref{eq:sigma2} and \eqref{eq:sigma2_alternative} to have the form we desired.
+
+\begin{equation*}
+\begin{split}
+ \sigma^2  
+ & =\sum_{k = 0}^{n-1} \frac{1-p_k}{p_k} +
+ \sum_{k = 0}^{n-1} \frac{1}{p_k} \Bigg( \frac{\eta_{k+1} \big(Q_{k,n}(1)^2\big)}{\big(\eta_{k+1} Q_{k+1,n}(1)\big)^2} - 1 \Bigg) \\
+ & = \sum_{k = 0}^{n-1} \frac{1-p_k}{p_k} +
+ \sum_{k = 0}^{n-1} \frac{1}{p_{k}} \eta_{k+1}\Big(\big(\frac{Q_{k,n}(1)}{\eta_{k+1} Q_{k+1,n}(1)} - 1\big)^2\Big)\\
+\end{split}
+\end{equation*}
+
+\section{An Upper Bound}
+
+As is shown on above, we failed to decompose the $\sigma^2$ recursively.
+Therefore, to obtain the inequality in the form:
+$$\eta_k \big( Q_{k-1,n}(1)^2 \big) \leq \mathcal{C}\cdot \eta_k \big( Q_{k,n}(1)^2\big)$$
+where $\mathcal{C}$ is some constant. We will make some assumptions over the mixing properties of transition kernels $M_k$.
+One possible assumption is that, for any $k \in \{0,1,\cdots,n-1\}$ and any test function $f$, we have:
+$$\forall x \in \mathds{R}^d \qquad M_k(f)(x) \leq C_k \cdot f(x)$$
+
+In our context, $f$ is a density function if $M_k(x,\mathrm{d}y)$ is absolutely
+continuous. To have more intuition of the choice of $C_k$, let us check an easy example.
+We consider a discrete markov transition where $M_k$ can be represented by a
+matrix and function $f$ is a vector. We supose that all the eigenvalues 
+of $M_k$ are real. In this case, we could choose 
+$C_k$ as the largest eigenvalue of matrix $M_k$.\\ 
+In order to the calculations, we will introduce some new notations:
+
+$$E_k : = \frac{\eta_{k} \big(Q_{k,n}(1)^2\big)}{\big(\eta_{k} Q_{k,n}(1)\big)^2}
+\qquad
+\tilde E_k : =  \frac{\eta_{k} \big(Q_{k-1,n}(1)^2\big)}{\big(\eta_{k} Q_{k,n}(1)\big)^2}$$ 
+
+We have seen in the last section that:
+
+$$E_k = \frac{1}{p_k}\tilde E_{k+1}$$
+
+By the assumption above, we have also:
+
+$$ \tilde E_{k+1} \leq p_k \cdot C_k^2 \cdot E_{k+1}$$
+
+Then, by combining the two equations above, we finally obtain an inequality:
+
+$$E_k \leq C^2_k \cdot E_{k+1}$$
+
+It's important to remark that we set all the $E_k = 1$ and $C^2_k = 1$ for $k \geq n$.
+
+\begin{equation*}
+        \begin{split}
+                \sigma^2 &= \sum_{k = 0}^{n-1} \big( E_k - 1\big) \\
+                &\leq -n +\sum _{k=0}^{n-1} C^2_k \cdot E_{k+1}\\
+                &\vdots \\
+                &\leq -n + \sum_{k=0}^{n-1} C^2_k \cdot C^2_{k+1}\cdots C^2_{k+(n-1)}\cdot 1\\
+        \end{split}
+\end{equation*}
+
+If we could choose a constant $C$, such that $C_k = C$ for every $k = 0,1,\dots,n-1$, we will obtain the upper bound below:
+$$\sigma^2 \leq C^2 \cdot \Bigg( \frac{1 - C^{2n} }{1 - C^2}\Bigg) - n$$
+
+We could see that the quality of the upper bound are guaranteed by the choice of constant $C_k$. And it is clear that there are some bound for $C$, because we have seen that there exists a lower bound of $\sigma^2$.
+
+
+
+
+
+
+
+
+
+\bibliographystyle{unsrt}%Used BibTeX style is unsrt
+\bibliography{citation}
+\end{document}
