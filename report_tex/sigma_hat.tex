@@ -17,12 +17,13 @@
 \section{Notations}
 
 In this section, we recall the notations used for the following calculations.
-We noticed that the notations are mainly from \cite{cerou2014fluctuation} 
+We notice that the notations are mainly from \cite{cerou2014fluctuation} 
 and \cite{cerou2012}. In the framework of multilevel spitting method, 
 we note $p$ the probability $\mathds{P}\big(S(X) > L_*\big)$. 
 For adaptive multilevel splitting method, we decompose p such that,
 $ p = \alpha^{n_0}r$, where $n_0 = \big\lfloor \frac{\mathrm{log}(p)}{\mathrm{log}(\alpha)} \big\rfloor$, $\alpha \in (0,1)$ and $r \in (\alpha,1)$.
-Here, to simplify the application of Feynman-Kac model, we will let $n = n_0 + 1$. For all the $k = 0,1,2,\dots,n_0-1$, we note $p_k = \alpha$ and $p_{n_0+1} = r$.
+Here, to simplify the application of Feynman-Kac model, we will let $n = n_0 + 1$. For all the $k = 0,1,2,\dots,n_0-1$, we note $p_k = \alpha$ and $p_{n_0} =p_{n-1} = r$.
+
 Therefore, the sequence of levels are noted as follow: 
 
 $$ -\infty = L_{-1} < L_0 < \dots < L_{n-1} < L_n = L_*$$
@@ -42,9 +43,11 @@ Adopting the notations pf Proposition 9.4.1 on page 301 of \cite{del2004feynman}
 \mathrm{Var}\Big(\sqrt{N}\big(\hat p - p\big)\Big) 
 \underset{N \to \infty}{\overset{\mathrm{d}}{\longrightarrow}}
  \mathds{E}\big(W_n^{\gamma}\big) \\ 
-= \gamma_{n}^2(1) \sum_{k = 0}^{n-1} \eta_k\Big(\big(\frac{Q_{k,n}(1)}{\eta_k Q_{k,n}(1)} - 1\big)^2\Big)
+= \gamma_{n}^2(1) \sum_{k = 0}^{n} \eta_k\Big(\big(\frac{Q_{k,n}(1)}{\eta_k Q_{k,n}(1)} - 1\big)^2\Big)
 \end{equation*}
 
+We remark that $Q_{n,n}$ in the last term of the sum is identity in the Feynman-Kac semi-group (page 88 Definition 2.7.2 \cite{del2004feynman}), i.e. $Q_{n,n}(x,\mathrm{d}y) = \delta_{x}(\mathrm{d}y)$.
+$$\eta_n \Big( \big( \frac{Q_{n,n}(1)}{\eta_n Q_{n,n}(1)} - 1\big)^2\Big) = 0$$
 In our context this can be written as follows:
 
 \begin{equation}\label{eq:sigma2}
@@ -60,13 +63,13 @@ equals 0. By the simple calculation, we could also have an alternative version o
  =  \sum_{k = 0}^{n-1} \Bigg( \frac{\eta_k \big(Q_{k,n}(1)^2\big)}{\big(\eta_k Q_{k,n}(1)\big)^2} - 1 \Bigg)
 \end{equation}
 
-Now, for every $k = 0,1,\dots,n-1$ we consider the following Boltzmann-Gibbs transformation:
+Now, for every $k = 0,1,\dots,n-1$ and every probability $\eta(\mathrm{d}x)$, we consider the following Boltzmann-Gibbs transformation:
 
 $$\Psi_{G_k}(\eta(\mathrm{d}x))(\mathrm{d}x') = \frac{G_k(x) \eta(\mathrm{d}x) }{\eta (G_k)}$$
 
-One can readily check that,
+Since $G_k(x) \cdot Q_{k,n}(1)(x) = Q_{k,n}(1)(x)$ holds for every $k = 0,1,\dots,n-1$ and for every $x \in \mathds{R}^{\mathrm{d}}$, one can readily check that
 
-$$\eta_{k} Q_k,n(1) = \eta_k(G_k) \cdot\Psi_{G_k} (\eta_k) \big(Q_{k,n}(1)\big) = p_k \cdot \eta_{k+1} \big{Q_k,n}(1) $$
+$$\eta_{k} Q_k,n(1) = \eta_k(G_k) \cdot\Psi_{G_k} (\eta_k) \big(Q_{k,n}(1)\big) = p_k \cdot \eta_{k+1} Q_{k,n}(1) $$
 
 $$\eta_{k} \big({Q_k,n}(1)^2\big) = \eta_k(G_k)\cdot\Psi_{G_k} (\eta_k) \big(Q_{k,n}(1)^2\big) = p_k \cdot \eta_{k+1} \big(Q_{k,n}(1)^2\big)$$
 
@@ -86,6 +89,7 @@ We combine these to the equations \eqref{eq:sigma2} and \eqref{eq:sigma2_alterna
  \sum_{k = 0}^{n-1} \frac{1}{p_k} \Bigg( \frac{\eta_{k+1} \big(Q_{k,n}(1)^2\big)}{\big(\eta_{k+1} Q_{k+1,n}(1)\big)^2} - 1 \Bigg) \\
  & = \sum_{k = 0}^{n-1} \frac{1-p_k}{p_k} +
  \sum_{k = 0}^{n-1} \frac{1}{p_{k}} \eta_{k+1}\Big(\big(\frac{Q_{k,n}(1)}{\eta_{k+1} Q_{k+1,n}(1)} - 1\big)^2\Big)\\
+ & \geq \sum_{k = 0}^{n-1} \frac{1-p_k}{p_k}
 \end{split}
 \end{equation*}
 
@@ -94,9 +98,9 @@ We combine these to the equations \eqref{eq:sigma2} and \eqref{eq:sigma2_alterna
 As is shown on above, we failed to decompose the $\sigma^2$ recursively.
 Therefore, to obtain the inequality in the form:
 $$\eta_k \big( Q_{k-1,n}(1)^2 \big) \leq \mathcal{C}\cdot \eta_k \big( Q_{k,n}(1)^2\big)$$
-where $\mathcal{C}$ is some constant. We will make some assumptions over the mixing properties of transition kernels $M_k$.
+where $\mathcal{C}$ is some positive constant. We will make some assumptions over the mixing properties of transition kernels $M_k$.
 One possible assumption is that, for any $k \in \{0,1,\cdots,n-1\}$ and any test function $f$, we have:
-$$\forall x \in \mathds{R}^d \qquad M_k(f)(x) \leq C_k \cdot f(x)$$
+$$\forall x \in \mathds{R}^{\mathrm{d}} \qquad M_k(f)(x) \leq C_k \cdot f(x)$$
 
 In our context, $f$ is a density function if $M_k(x,\mathrm{d}y)$ is absolutely
 continuous. To have more intuition of the choice of $C_k$, let us check an easy example.
