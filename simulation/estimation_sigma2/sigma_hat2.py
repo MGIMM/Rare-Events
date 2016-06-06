@@ -57,14 +57,14 @@ def shaker_metropolis(x,sigma_1):
 
 print ('\n============================================================')
 ####### parameters ######
-p_0_test = 0.7 
-N_test = 1000
+p_0_test = 0.4 
+N_test = 2000
 #shaker = shaker_metropolis
 shaker = shaker_gaussian
 shake_times = 1 
 reject_rate = 0.9
 num_simulation = 100
-level_test = 5 
+level_test = 3.3
 #def input_parameters():
 #    print ('please input the parameters:\n')
 #    p_0_test = input('p_0_test: ')
@@ -96,9 +96,8 @@ rare_test = RareEvents(mu_0 = mu_0_test, score_function = S_test,\
 	level = level_test,shaker = shaker, p_0 = p_0_test)
 
 #test
-#rare_test.adaptive_levels(N = N_test, shake_times = 1,\ 
-# reject_rate = 0.5, sigma_default = 0.5, descent_step = 0.1,status_tracking=True)
-#
+rare_test.adaptive_levels(N = N_test, shake_times = 1, reject_rate = 0.5, sigma_default = 0.5, descent_step = 0.1,status_tracking=True)
+
 
 ##############################
 ### simualtion & plotting ####

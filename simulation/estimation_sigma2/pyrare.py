@@ -96,7 +96,7 @@ class RareEvents:
             L = np.append(L, np.sort(self.score_function(X))[np.int((1-p_0)*N)])
             k += 1
 
-        N_L = np.sum((self.score_function(X)>L[-1]))
+        N_L = np.sum((self.score_function(X)>self.level))
         r_hat = N_L/float(N)
         p_hat = p_0**(k-1)*r_hat 
         n = k - 1
@@ -104,7 +104,7 @@ class RareEvents:
         for i in range(N):
             for j in range(N):
                 if E[n][j] == i:
-                    phi[i] += np.float(self.score_function(X[j])>L[-1])
+                    phi[i] += np.float(self.score_function(X[j])>self.level)
             phi[i] = phi[i]/float(N)
 
         phi = np.array(phi)
@@ -120,7 +120,7 @@ class RareEvents:
             #print ("score_function called: %s times" % S_called_times)
         output = {'p_hat':p_hat,  \
                  
-                 , 'V': V
+                  'V': V
                  }    
         return output 
 
@@ -223,6 +223,7 @@ class RareEvents:
             phi[i] = phi[i]/float(N)
 
         phi = np.array(phi)
+        print phi
         #m = (N/float(N-1))**(n+1)*(r_hat**2 - np.sum(phi**2))
         m = (N/float(N-1))**(n+1)*(1 - np.sum(phi**2))
         V = 1 - m
@@ -237,6 +238,6 @@ class RareEvents:
             #print ("score_function called: %s times" % S_called_times)
         output = {'p_hat':p_hat,  \
                  
-                 , 'V': V
+                  'V': V
                  }    
         return output 
