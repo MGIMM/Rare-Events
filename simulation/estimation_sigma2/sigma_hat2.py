@@ -57,11 +57,11 @@ def shaker_metropolis(x,sigma_1):
 
 print ('\n============================================================')
 ####### parameters ######
-p_0_test = 0.4 
-N_test = 2000
-#shaker = shaker_metropolis
-shaker = shaker_gaussian
-shake_times = 1 
+p_0_test = 0.3 
+N_test = 1000
+shaker = shaker_metropolis
+#shaker = shaker_gaussian
+shake_times = 2 
 reject_rate = 0.9
 num_simulation = 100
 level_test = 3.3
@@ -148,3 +148,6 @@ print 'list_prediction:'
 print list_V
 print 'mean of prediction:'
 print np.mean(list_V)
+#plt.hist(list_V, normed = 1, color = 'grey', alpha = 0.5)
+#plt.title("Histogram of Prediction")
+#plt.show()
