@@ -58,12 +58,12 @@ def shaker_metropolis(x,sigma_1):
 print ('\n============================================================')
 ####### parameters ######
 p_0_test = 0.3 
-N_test = 1000
-shaker = shaker_metropolis
-#shaker = shaker_gaussian
+N_test = 100
+#shaker = shaker_metropolis
+shaker = shaker_gaussian
 shake_times = 2 
 reject_rate = 0.9
-num_simulation = 100
+num_simulation = 200
 level_test = 3.3
 #def input_parameters():
 #    print ('please input the parameters:\n')
@@ -144,10 +144,10 @@ print ('============================================================\n')
 #print relative_var
 #print 'variance corrected:'
 #print np.var((np.abs(relative_var)<12)*relative_var)
-print 'list_prediction:'
-print list_V
-print 'mean of prediction:'
-print np.mean(list_V)
-#plt.hist(list_V, normed = 1, color = 'grey', alpha = 0.5)
-#plt.title("Histogram of Prediction")
-#plt.show()
+print ('list_prediction:')
+print (list_V)
+print ('mean of prediction:')
+print (np.mean(list_V))
+plt.hist(list_V, normed = 1, color = 'grey', alpha = 0.5)
+plt.title("Histogram of Prediction")
+plt.show()
