@@ -50,6 +50,7 @@ class RareEvents:
 
        ###### permutation trick to replace multinominal distribution
        # we remark that the permutation doesn't work for the estimator of var
+
             #I = np.random.permutation(I)
             #q = 0
             #for i in clone_index:
@@ -109,7 +110,8 @@ class RareEvents:
             phi[i] = phi[i]/float(N)
 
         phi = np.array(phi)
-        m = (N/float(N-1))**(n+1)*(r_hat**2 - np.sum(phi**2))
+        m = (N/float(N-1))**k*(r_hat**2 - np.sum(phi**2))
+        #m = (r_hat**2 - np.sum(phi**2))
         V = r_hat**2 - m
         V = V/r_hat**2
         V *= N
@@ -118,6 +120,7 @@ class RareEvents:
             print ("estimation of p: " + str(p_hat))
             print ('____________________________________________________________\n')
             print ("Time spent: %s s" %(time() - t_0) )
+            print ("Estimation of variance: " + str(V))
             #print ("score_function called: %s times" % S_called_times)
         output = {'p_hat':p_hat,  \
                  

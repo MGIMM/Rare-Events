@@ -29,7 +29,7 @@ def get_paramS_test(level_test = 8, p_0 = 0.75,status_tracking = True):
         print ("p_0 = " + str(p_0) + '\t n_0 =' + str(n_0) + "\t r = " + str(r))
         #print ("sequence of levels: "+ str(l_ideal))
         print ("real value of p: " + str(real_p))
-        print ("theoretical relative deviation: " + str(sigma_theoretical))
+        print ("relative deviation(ideal): " + str(sigma_theoretical))
     return real_p, sigma_theoretical, n_0, l_ideal
 
 def mu_0_test(n):
@@ -57,14 +57,14 @@ def shaker_metropolis(x,sigma_1):
 
 print ('\n============================================================')
 ####### parameters ######
-p_0_test = 0.3 
-N_test = 100
+p_0_test = 0.8 
+N_test = 2000
 #shaker = shaker_metropolis
 shaker = shaker_gaussian
 shake_times = 2 
-reject_rate = 0.9
+reject_rate = 0.3
 num_simulation = 200
-level_test = 3.3
+level_test = 6 
 #def input_parameters():
 #    print ('please input the parameters:\n')
 #    p_0_test = input('p_0_test: ')
@@ -96,7 +96,8 @@ rare_test = RareEvents(mu_0 = mu_0_test, score_function = S_test,\
 	level = level_test,shaker = shaker, p_0 = p_0_test)
 
 #test
-rare_test.adaptive_levels(N = N_test, shake_times = 1, reject_rate = 0.5, sigma_default = 0.5, descent_step = 0.1,status_tracking=True)
+rare_test.adaptive_levels(N = N_test, shake_times = 1, reject_rate = 0.5,
+        sigma_default = 0.5, descent_step = 0.05,status_tracking=True)
 
 
 ##############################
@@ -122,7 +123,7 @@ for i in range(num_simulation):
 #adaptive_levels
     iter_output = rare_test.adaptive_levels\
             (N = N_test, shake_times = shake_times,reject_rate = reject_rate, \
-            sigma_default = 0.5, descent_step = 0.1,status_tracking=False)
+            sigma_default = 0.5, descent_step = 0.05,status_tracking=False)
     list_p = np.append(list_p, iter_output['p_hat'])           
     list_V = np.append(list_V, iter_output['V'])
 #r_hat = np.mean(list_r)
