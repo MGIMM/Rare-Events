@@ -1,0 +1,84 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}%from the package 'doublestroke'
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Variance Estimator \\for Adaptive Multilevel Splitting}
+\author{Qiming DU}
+\date{}
+%\setlength\parindent{0pt}
+\begin{document}
+\maketitle
+\vspace{3cm}
+\section*{Introduction}
+As we know, the estimation of variance (asymptotic or non-asymptotic)
+in the framework
+of Adaptive Multilevel Splitting is always problematic. The classic solution is 
+to run the algorithm $N$ times independently and to use the empirical 
+version of the variance as a crude estimator.
+The convergence is then guaranteed by
+the Law of Large Numbers. However, as we already know, the cost of the algorithm 
+is alway very expensive and this kind of calculation is not always practical. 
+An alternative solution which is realtively more efficient is then 
+an interesting problem.
+
+Inspired by the variance estimator introduced by Lee \& Whiteley in \cite{lee2015},
+which is already prove to be efficient for the particle filter framework,
+we would like to prove that the estimator is also usable for the Adaptive 
+Multilevel Splitting framework. By using this kind of estimator, all we need is
+to run one simulation to give an estimation of the non-asymptotic variance, and
+the terms for calculating the asymptotic variance.
+The main difference between thess two framework
+is that the selection function $G$ and transition kernel $M$ are not
+deterministic
+for the latter. Thanks to the work by F.Cérou et A.Guyader in \cite{cerou2014fluctuation}, we have the tools to deal with the randomness of $G$ and $M$.    
+
+We remark that the notations used for the following sections are mainly from \cite{lee2015} and \cite{cerou2014fluctuation}.   
+
+\section{Fixed Level Method}
+In this seciton, we firstly consider a general Feynman-Kac framework 
+where all the selection function $G$ and transition kernel $M$ are deterministic. We will try to give a more intuitive construction of the estimator mentioned in \cite{lee2015}. 
+
+In the classic Feynman-Kac model, for example the variaty of models introduced
+in \cite{del2004feynman}, we modelize the particle system by "one abstract
+particle", with respect to the empirical measure and the transition of the evolution of the
+particle system. For example, the transition of the system from level $k$ to
+level $k+1$ is
+represented by:
+
+\begin{equation}
+                \label{FK_classic}
+Q_{k+1}(x,\mathrm{d}y) = G_k(x)M_{k+1}(x,\mathrm{d}y)
+\end{equation}
+
+This kind of presentation make the so-called cloning procedure invisible.
+In fact, the intrinsic problem is that, wo lost the connection between the normalized measure
+$\hat\eta_k$ and $\hat \eta_{k+1}$. Both of these two measures are sampled
+directly, so the cloning procedure just hide behind it.
+
+In order to have a more precise representation, or in order to get more
+information of the cloning procedure, we will introduce a new
+notation to indicate the information the branching procedure of
+the particle system.
+For $p \in [n-1]$ and for $q \in [N]$, where $N$ is the number of particles, we
+define
+
+$$
+a_p^q:\ \text{the ancestor in the level $p$ of the $q^{th}$ particle in the
+level $p+1$}
+$$
+$$
+a_p:\ \text{the vector of ancestors in level $p$ for particles in level $p+1$}
+$$
+
+
+
+
+
+\bibliographystyle{unsrt}%Used BibTeX style is unsrt
+\bibliography{citation}%bibtex file should be names as citation.bib
+\end{document}
