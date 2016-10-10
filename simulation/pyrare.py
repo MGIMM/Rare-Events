@@ -10,7 +10,33 @@ class RareEvents:
         :param p_0: successful rate
         :param mu_0: distribution of X_0
         :param score_function: black box score_function
-        :param shaker: metro-polis/Gibbs kernel
+        :param shaker: metro-polis/Gibbs/Gaussian(for the toy example) kernel
+        """
+        """
+        Remark:
+        
+        1. For the estimation of variance, we cannot change the times of
+        shaking by the empirical reject_rate. The shaking procedure won't
+        change the unbiasedness of the approximation of terminal path
+        measures \gamma_n^N and \eta_n^N, but it will change the intergral
+        operator \phi_p and the variance itself, and that's why the more we
+        shake, the more close we get to the theoretical lower bound of the
+        asymptotic variance. But, as we did before, if we really want a
+        little variance which is close to the theoretical lower bound, this
+        trick is still useful.
+
+        2. The 1st estimator is the estimator of non asymptotic variance,
+        which is relatively easier to get by the algorithm we provided. We
+        have the a.s. convergence of this estimator to the asymptotic ones.
+        
+        3. We cannot use permutation to replace the multinomial procedure
+        anymore. This trick will not effect the unbiasedness of the
+        estimator and the crude estimator of the variance, but our
+        estimator is not compatible with this trick. Further study will be
+        done in a form of reconstruction of genealogical structure of the
+        complete ancestral trees. The effects of sample method in the
+        multinomial procedure is still mysterious.
+
         """
         self.mu_0 = mu_0
         self.score_function = score_function
@@ -102,6 +128,9 @@ class RareEvents:
         r_hat = N_L/float(N)
         p_hat = p_0**(k-1)*r_hat 
         n = k - 1
+
+        ## terminal occupation measure of different eves.
+        ## start of estimator 1 (non asymptotic)
         phi = np.zeros(N)
         for i in range(N):
             for j in range(N):
@@ -115,6 +144,9 @@ class RareEvents:
         V = r_hat**2 - m
         V = V/r_hat**2
         V *= N
+        ## end of estimator 1
+        ######### this bloc is for the calculations of the traced
+        ######### genealogical information.       
 
         if status_tracking ==True:
             print ("estimation of p: " + str(p_hat))
