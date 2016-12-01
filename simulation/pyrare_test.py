@@ -1,10 +1,7 @@
 import numpy as np
 from time import time
 
-
-class RareEvents:
-    def __init__(self, mu_0, score_function,
-                 shaker,level, p_0 = 0.75):
+class RareEvents: def __init__(self, mu_0, score_function, shaker,level, p_0 = 0.75):
         """
         :param level: level to estimate
         :param p_0: successful rate, the classical way is to choose p_0 large,
@@ -181,10 +178,10 @@ def shaker_gaussian(x,sigma_1=0.2):
     return np.random.normal(x/c,sigma_1/c,1)
 
 ##########################################################################################
+# test by a toy example
 
 if __name__ == '__main__':
 
-    from time import time
     from ProgressBar import *
     from matplotlib import pyplot as plt
     import seaborn as sns
@@ -220,7 +217,7 @@ if __name__ == '__main__':
 
     def var_estimator_non_asym(xi,A,N = N_test):
         '''
-        this function is simplifief version for estimating the asymptotic variance for 
+        this function is simplified version for estimating the asymptotic variance for 
         f = \mathds{1}_{\{S(x)>level_test\}}. 
         '''
         
