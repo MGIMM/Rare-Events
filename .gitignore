@@ -1,5 +1,6 @@
 # Ignore docs files
 
+
 # Numerous always-ignore extensions
 *.diff
 *.err
@@ -10,8 +11,9 @@
 *.swp
 *.zip
 *.vi
-*.pyc
 *~
+*.pyc
+*.ipynb_checkpoints
 
 # OS or Editor folders
 .DS_Store
@@ -26,11 +28,8 @@ nbproject
 *.sublime-project
 *.sublime-workspace
 .idea
-.ipynb_checkpoints
-
-# Komodo
-*.komodoproject
-.komodotools
 
 
 # Folders to ignore
+simulation/logs
+simulation/output
